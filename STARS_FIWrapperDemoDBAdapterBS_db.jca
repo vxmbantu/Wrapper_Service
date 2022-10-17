@@ -1,0 +1,14 @@
+<adapter-config name="STARS_FIWrapperDemoDBAdapterBS" adapter="db" wsdlLocation="STARS_FIWrapperDemoDBAdapterBS.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="STRDV1" location="eis/Stars/DB"/>
+  <endpoint-interaction portType="STARS_FIWrapperDemoDBAdapterBS_ptt" operation="STARS_FIWrapperDemoDBAdapterBS">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="APPS"/>
+      <property name="PackageName" value="SAS_FIA_FI_MGR_API"/>
+      <property name="ProcedureName" value="GET_FI_MANAGER"/>
+      <property name="QueryTimeout" value="120"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config">
+    <con:coreEntry>
+        <con:binding type="SOAP" isSoap12="false" xsi:type="con:SoapBindingType">
+            <con:wsdl ref="STARS_FIWrapperServiceDemo/Resources/WSDLs/FIWrapperServiceDemonteraction"/>
+            <con:binding>
+                <con:name>WrapperServiceDemoBinding</con:name>
+                <con:namespace>urn:FIWrapperServiceDemonteraction</con:namespace>
+            </con:binding>
+        </con:binding>
+        <con:xqConfiguration>
+            <con:snippetVersion>1.0</con:snippetVersion>
+        </con:xqConfiguration>
+    </con:coreEntry>
+    <con:router>
+        <con:pipeline type="request" name="request-N53edf5d9.N1f34ca9e.0.183d027455a.N7f53">
+            <con:stage id="_StageId-N53edf5d9.N1f34ca9e.0.183d027455a.N7f51" name="Stage1">
+                <con:context>
+                    <con1:userNsDecl prefix="exam" namespace="http://www.example.org"/>
+                </con:context>
+                <con:actions>
+                    <con2:assign varName="Request">
+                        <con1:id>_ActionId-N53edf5d9.N1f34ca9e.0.183d027455a.N7f16</con1:id>
+                        <con2:expr>
+                            <con1:xqueryText>&lt;ns2:InputParameters xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/sp/STARS_FIWrapperDemoDBAdapterBS">
+&lt;ns2:P_DEALER_CODE>{fn:data($body/exam:WrapperServiceDemoRequest/exam:DealerCode)}&lt;/ns2:P_DEALER_CODE>
+&lt;/ns2:InputParameters></con1:xqueryText>
+                        </con2:expr>
+                    </con2:assign>
+                    <con2:assign varName="Request">
+                        <con1:id>_ActionId-N53edf5d9.N1f34ca9e.0.183d027455a.N7f0c</con1:id>
+                        <con1:disabled>true</con1:disabled>
+                        <con2:expr>
+                            <con1:xqueryText>data($body/exam:WrapperServiceDemoRequest/exam:DealerCode)</con1:xqueryText>
+                        </con2:expr>
+                    </con2:assign>
+                    <con2:wsCallout>
+                        <con1:id>_ActionId-N53edf5d9.N1f34ca9e.0.183d027455a.N7f13</con1:id>
+                        <con2:service ref="STARS_FIWrapperServiceDemo/BusinessServices/STARS_FIWrapperDemoDBAdapterBS" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con2:operation>STARS_FIWrapperDemoDBAdapterBS</con2:operation>
+                        <con2:request>
+                            <con2:body wrapped="false">Request</con2:body>
+                        </con2:request>
+                        <con2:response>
+                            <con2:body wrapped="false">Response</con2:body>
+                        </con2:response>
+                        <con2:requestTransform/>
+                        <con2:responseTransform/>
+                    </con2:wsCallout>
+                    <con2:replace varName="body" contents-only="true">
+                        <con1:id>_ActionId-N53edf5d9.N1f34ca9e.0.183d027455a.N7f0f</con1:id>
+                        <con2:location>
+                            <con1:xpathText>.</con1:xpathText>
+                        </con2:location>
+                        <con2:expr>
+                            <con1:xqueryTransform>
+                                <con1:resource ref="STARS_FIWrapperServiceDemo/Resources/Transformations/StarsDBtoService"/>
+                                <con1:param name="Response">
+                                    <con1:path>$Response</con1:path>
+                                </con1:param>
+                            </con1:xqueryTransform>
+                        </con2:expr>
+                    </con2:replace>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="response" name="response-N53edf5d9.N1f34ca9e.0.183d027455a.N7f52">
+            <con:stage id="_StageId-N53edf5d9.N1f34ca9e.0.183d027455a.N7f50" name="Stage1">
+                <con:context/>
+                <con:actions/>
+            </con:stage>
+        </con:pipeline>
+        <con:flow>
+            <con:pipeline-node name="Pipeline Pair Node1">
+                <con:request>request-N53edf5d9.N1f34ca9e.0.183d027455a.N7f53</con:request>
+                <con:response>response-N53edf5d9.N1f34ca9e.0.183d027455a.N7f52</con:response>
+            </con:pipeline-node>
+        </con:flow>
+    </con:router>
+</con:pipelineEntry>

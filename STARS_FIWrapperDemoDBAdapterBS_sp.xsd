@@ -1,0 +1,40 @@
+<schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/sp/STARS_FIWrapperDemoDBAdapterBS" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/sp/STARS_FIWrapperDemoDBAdapterBS" elementFormDefault="qualified">
+   <element name="InputParameters">
+      <complexType>
+         <sequence>
+            <element name="P_DEALER_CODE" type="string" db:index="1" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <element name="OutputParameters">
+      <complexType>
+         <sequence>
+            <element name="X_STATUS_MESSAGE" type="string" db:index="2" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="X_STATUS_CODE" type="string" db:index="3" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="X_FI_MANAGER_TBL" type="db:APPS.SAS_FIA_FI_MANAGER_TBL" db:index="4" db:type="Array" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <complexType name="APPS_NE.SAS_FIA_FI_MANAGER_REC">
+      <sequence>
+         <element name="FULL_NAME" type="db:string100" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         <element name="USERNAME" type="db:string60" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         <element name="EMAIL_ADDRESS" type="db:string100" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+      </sequence>
+   </complexType>
+   <complexType name="APPS.SAS_FIA_FI_MANAGER_TBL">
+      <sequence>
+         <element name="X_FI_MANAGER_TBL_ITEM" type="db:APPS_NE.SAS_FIA_FI_MANAGER_REC" db:type="Struct" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+      </sequence>
+   </complexType>
+   <simpleType name="string100">
+      <restriction base="string">
+         <maxLength value="100"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string60">
+      <restriction base="string">
+         <maxLength value="60"/>
+      </restriction>
+   </simpleType>
+</schema>

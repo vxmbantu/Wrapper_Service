@@ -1,0 +1,15 @@
+<wsdl:definitions targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/STARSFIWrapperServiceApp/STARS_FIWrapperServiceDemo/STARS_FIWrapperDemoDBAdapterBS" name="STARS_FIWrapperDemoDBAdapterBS-concrete" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+    <wsdl:import location="STARS_FIWrapperDemoDBAdapterBS.wsdl" namespace="http://xmlns.oracle.com/pcbpel/adapter/db/STARSFIWrapperServiceApp/STARS_FIWrapperServiceDemo/STARS_FIWrapperDemoDBAdapterBS"/>
+    <wsdl:binding name="STARS_FIWrapperDemoDBAdapterBS_ptt-binding" type="star:STARS_FIWrapperDemoDBAdapterBS_ptt" xmlns:star="http://xmlns.oracle.com/pcbpel/adapter/db/STARSFIWrapperServiceApp/STARS_FIWrapperServiceDemo/STARS_FIWrapperDemoDBAdapterBS">
+        <soap:binding style="document" transport="http://www.bea.com/wli/sb/transports/jca"/>
+        <wsdl:operation name="STARS_FIWrapperDemoDBAdapterBS">
+            <soap:operation soapAction="STARS_FIWrapperDemoDBAdapterBS"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+</wsdl:definitions>

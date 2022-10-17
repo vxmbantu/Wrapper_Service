@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<definitions targetNamespace="urn:FIWrapperServiceDemonteraction" xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:tns="urn:FIWrapperServiceDemonteraction" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+             xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:weo="http://www.example.org">
+  <types>
+    <xsd:schema targetNamespace="urn:FIWrapperServiceDemonteraction/types" elementFormDefault="qualified"/>
+    <xsd:schema>
+      <xsd:import schemaLocation="../Schemas/FIWrapperServiceDemoSchema.xsd" namespace="http://www.example.org"/>
+    </xsd:schema>
+  </types>
+  <message name="WrapperServiceDemoReqMsg">
+    <part name="part" element="weo:WrapperServiceDemoRequest"/>
+  </message>
+  <message name="WrapperServiceResMsg">
+    <part name="part" element="weo:WrapperServiceDemoResponse"/>
+  </message>
+  <portType name="WrapperServiceDemoPort">
+    <operation name="FIWrapperServiceDemo">
+      <input message="tns:WrapperServiceDemoReqMsg"/>
+      <output message="tns:WrapperServiceResMsg"/>
+    </operation>
+  </portType>
+  <binding name="WrapperServiceDemoBinding" type="tns:WrapperServiceDemoPort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="FIWrapperServiceDemo">
+      <soap:operation style="document" soapAction="urn:FIWrapperServiceDemonteraction/FIWrapperServiceDemo"/>
+      <input>
+        <soap:body use="literal" parts="part"/>
+      </input>
+      <output>
+        <soap:body use="literal" parts="part"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="WrapperServiceDemo_1_0">
+    <port name="WrapperServiceDemoPort" binding="tns:WrapperServiceDemoBinding">
+      <soap:address location="http://www.example.com"/>
+    </port>
+  </service>
+</definitions>
